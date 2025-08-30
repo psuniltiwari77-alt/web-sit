@@ -1,0 +1,205 @@
+doctype.html
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sunil Tiwari – 3D Colorful Card</title>
+  <style>
+    :root{
+      --bg1:#1e3c72; /* deep blue */
+      --bg2:#2a5298; /* light blue */
+      --bg3:#00c6ff; /* cyan */
+      --bg4:#0072ff; /* bright blue */
+      --card:#0b1020;
+      --accent:#ffd86f;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:#fff;
+      overflow:hidden;
+      background: linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+      background-size: 300% 300%;
+      animation: bgMove 18s ease-in-out infinite;
+    }
+
+    @keyframes bgMove {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .stage{
+      position:relative;
+      height:100%;
+      display:grid;
+      place-items:center;
+      perspective: 1200px;
+    }
+
+    .card-wrap{
+      position:relative;
+      width:min(92vw, 820px);
+      transform-style: preserve-3d;
+    }
+
+    .glow{
+      position:absolute; inset:-8px;
+      background: conic-gradient(from 0deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4), var(--bg1));
+      filter: blur(18px) saturate(1.4);
+      opacity:.65; border-radius: 28px;
+      transform: translateZ(-60px);
+    }
+
+    .card{
+      position:relative;
+      border-radius: 24px;
+      background: radial-gradient(1200px 600px at -20% -20%, #18223b 0%, #0b1020 45%, #05070f 100%);
+      border: 1px solid #ffffff22;
+      box-shadow: 0 30px 80px #0008, inset 0 0 0 1px #ffffff08;
+      padding: clamp(18px, 3.2vw, 40px);
+      transform-style: preserve-3d;
+      transition: transform .15s ease-out;
+      text-align:center;
+    }
+
+    .photo{
+      width:140px; height:140px; border-radius:50%; overflow:hidden;
+      margin:0 auto 1rem;
+      box-shadow:0 0 20px #000a, 0 0 30px #fff3;
+      transform: translateZ(60px);
+    }
+    .photo img{ width:100%; height:100%; object-fit:cover; }
+
+    .badge{
+      position:absolute; right:18px; top:18px;
+      padding:.4rem .8rem; border-radius: 999px;
+      background: linear-gradient(120deg, #ffffff33, #ffffff10);
+      border:1px solid #ffffff40; backdrop-filter: blur(8px);
+      font-weight:600; letter-spacing:.3px; text-transform:uppercase; font-size: .76rem;
+      transform: translateZ(60px);
+    }
+
+    h1{
+      margin:0 0 .5rem; font-size: clamp(2rem, 6vw, 3.4rem);
+      line-height:1.05; letter-spacing:.5px;
+      text-shadow: 0 6px 18px #0008, 0 0 20px #ffd86f66, 0 0 42px #ffd86f33;
+      transform: translateZ(70px);
+    }
+
+    .title-accent{ color: var(--accent); text-shadow: 0 0 10px #ffd86f66 }
+
+    p{ margin:.25rem 0; font-size: clamp(1rem, 2.6vw, 1.2rem); opacity:.95; transform: translateZ(45px); }
+
+    .grid{ display:grid; grid-template-columns: 1fr; gap:12px; margin-top:1rem; }
+    @media (min-width:680px){ .grid{ grid-template-columns: 1fr 1fr; } }
+
+    .tile{
+      background: linear-gradient(180deg, #ffffff10, #ffffff05);
+      border:1px solid #ffffff22; border-radius: 18px; padding:14px 16px;
+      box-shadow: inset 0 0 30px #ffffff06; min-height:68px;
+      transform: translateZ(50px);
+    }
+
+    .label{ font-size:.8rem; letter-spacing:.4px; text-transform:uppercase; opacity:.7 }
+    .value{ font-size: clamp(1.05rem,2.6vw,1.25rem); font-weight:700 }
+
+    .footer{ margin-top: 1.25rem; display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center; transform: translateZ(40px); }
+    .btn{ appearance:none; border:none; cursor:pointer; padding:.8rem 1rem; border-radius:12px; font-weight:700; background: linear-gradient(120deg, var(--bg2), var(--bg1)); color:#fff; box-shadow: 0 12px 26px #0007, inset 0 0 0 1px #ffffff33; transition: transform .12s ease, box-shadow .2s ease; }
+    .btn:active{ transform: translateY(1px) scale(.99) }
+
+    .credit{ position:fixed; left:10px; bottom:10px; font-size:.8rem; opacity:.8 }
+    .credit a{ color:#fff }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="card-wrap" id="cardWrap">
+      <div class="glow"></div>
+      <section class="card" id="card">
+        <span class="badge">3D • Card</span>
+        <div class="photo">
+          <!-- Apna photo yahan lagayen -->
+          <img src="sunil.jpg.jpg" alt="Sunil Tiwari Photo" />
+        </div>
+        <h1><span class="title-accent">Sunil</span> Tiwari</h1>
+        <p style="opacity:.85">📧 psuniltiwari7484@email.com</p>
+
+        <div class="grid">
+          <div class="tile">
+            <div class="label">Mobile Number</div>
+            <div class="value">7484065298</div>
+          </div>
+          <div class="tile">
+            <div class="label">City</div>
+            <div class="value">east champaran</div>
+          </div>
+          <div class="tile">
+            <div class="label">village</div>
+            <div class="value">Madhubani</div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <button class="btn" id="copyBtn">Copy Details</button>
+        </div>
+
+        <!-- Song Embed -->
+        <div style="margin-top:2rem; transform: translateZ(40px);">
+          <iframe width="100%" height="120" 
+            src="https://www.youtube.com/embed/uiFeS5U46kw" 
+            title="Not Like You Song" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="credit">Made for <strong>Sunil Tiwari</strong></div>
+
+  <script>
+    const stage = document.getElementById('stage');
+    const cardWrap = document.getElementById('cardWrap');
+    const card = document.getElementById('card');
+
+    let rect; 
+    function updateRect(){ rect = cardWrap.getBoundingClientRect(); }
+    updateRect();
+    window.addEventListener('resize', updateRect);
+
+    stage.addEventListener('pointermove', (e)=>{
+      const x = e.clientX - rect.left; 
+      const y = e.clientY - rect.top;
+      const px = (x/rect.width - .5) * 2;
+      const py = (y/rect.height - .5) * 2;
+      const rotateX = (+py * 8).toFixed(2);
+      const rotateY = (-px * 12).toFixed(2);
+      cardWrap.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    stage.addEventListener('pointerleave', ()=>{
+      cardWrap.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+
+    // Copy button
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.addEventListener('click', async()=>{
+      const text = `Name: Sunil Tiwari\nEmail: psuniltiwari7484@email.com\nMobile: 7484065298\nCity: east champaran\nvillage: Madhubani`;
+      try{
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Copied! ✅';
+        setTimeout(()=> copyBtn.textContent = 'Copy Details', 1400);
+      }catch(err){
+        alert('Copy failed: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>
